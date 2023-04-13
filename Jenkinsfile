@@ -17,9 +17,10 @@ pipeline{
 
             }
         }
-        stage("C"){
+        stage("Maven Integration testing"){
             steps{
-                echo "========executing A========"
+                echo "========executing Integration testing========"
+                sh 'mvn verify -DskipUnitTest'
             }
         }
         stage("D"){
