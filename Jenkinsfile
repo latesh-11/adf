@@ -8,9 +8,13 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/latesh-11/demo-app.git'
             }
         }
-        stage("B"){
+        stage("UNIT Testing"){
             steps{
-                echo "========executing A========"
+                echo "========executing Maven Test========"
+
+                sh 'maven test'
+
+
             }
         }
         stage("C"){
