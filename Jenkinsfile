@@ -8,7 +8,7 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/latesh-11/demo-app.git'
             }
         }
-        stage("UNIT Testing"){
+        stage("Maven UNIT Testing"){
             steps{
                 echo "========executing Maven Test========"
 
@@ -23,9 +23,10 @@ pipeline{
                 sh 'mvn verify -DskipUnitTest'
             }
         }
-        stage("D"){
+        stage("Maven build"){
             steps{
-                echo "========executing A========"
+                echo "========executing Maven Build========"
+                sh 'mvn clean install'
             }
         }
         stage("E"){
