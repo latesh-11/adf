@@ -12,7 +12,7 @@ pipeline{
             steps{
                 echo "========executing Maven Test========"
 
-                sh 'maven test'
+                sh 'mvn test'
 
 
             }
