@@ -29,13 +29,11 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
-        stage("static code analysis"){
+        stage("SonarQube analysis"){
             steps{
-                scripts {
-                    echo "========executing static code analysis========"
-                    
+                 echo "========executing static code analysis========"
+                script{
                     withSonarQubeEnv(credentialsId: 'sonar-api-key') {
-
                     sh 'mvn clean package sonar:sonar'
                     }
                 }
