@@ -31,12 +31,15 @@ pipeline{
         }
         stage("static code analysis"){
             steps{
-                echo "========executing static code analysis========"
-
-                withSonarQubeEnv(credentialsId: 'sonar-api-key') {
+                scripts {
+                    echo "========executing static code analysis========"
+                    
+                    withSonarQubeEnv(credentialsId: 'sonar-api-key') {
 
                     sh 'mvn clean package sonar:sonar'
-            }
+                    }
+                }
+
             }
         }
         stage("F"){
