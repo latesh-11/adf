@@ -41,15 +41,31 @@ pipeline{
         }
         stage("Quality Gate Status"){
             steps{
-                echo "========executing A========"
+                echo "========executing Quality Gate Status========"
                 script {
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api-key' 
                 }
             }
         }
-         stage("g"){
+         stage("upload warfile to nexus"){
             steps{
-                echo "========executing A========"
+                echo "========executing upload warfile to nexus========"
+                script{
+                    nexusArtifactUploader artifacts: [
+                        [
+                            artifactId: 'springboot', classifier: '',
+                             file: 'target/Uber.jar', 
+                             type: 'jar'
+                            ]
+                        ], 
+                        credentialsId: '9167ac14-c357-44c3-bc27-5f05c6f164c4',
+                        groupId: 'com.example', 
+                        nexusUrl: '192.168.1.7:8081',
+                        nexusVersion: 'nexus2',
+                        protocol: 'http', 
+                        repository: 'demoapp-release', 
+                        version: '1.0.0'
+                }
             }
         }
     }
