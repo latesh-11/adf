@@ -37,10 +37,17 @@ pipeline{
                     sh 'mvn clean package sonar:sonar'
                     }
                 }
-
             }
         }
-        stage("F"){
+        stage("Quality Gate Status"){
+            steps{
+                echo "========executing A========"
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api-key' 
+                }
+            }
+        }
+         stage("g"){
             steps{
                 echo "========executing A========"
             }
