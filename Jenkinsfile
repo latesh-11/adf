@@ -85,7 +85,7 @@ pipeline{
         stage("image push to dockerhub"){
             steps{
                 echo "========executing image push========"
-                withCredentials([string(credentialsId: 'docker-pass', variable: 'dockerPassword')]) {
+                withCredentials([string(credentialsId: 'docker-pass', variable: 'dockerPwd')]) {
                     sh "docker login -u lateshh -p ${Docker-pass}"
                     sh 'docker image push lateshh/${JOB_NAME}:v1.${BUILD_ID}'
                     sh 'docker image push lateshh/${JOB_NAME}:latest'
