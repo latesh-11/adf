@@ -76,9 +76,7 @@ pipeline{
             steps{
                 echo "========executing Docker image build========"
                 script {
-                     sh 'docker image build -t ${JOB_NAME}:v1.${BUILD_ID} .'
-                     sh 'docker image tag ${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:v1.${BUILD_ID} '
-                     sh 'docker image tag ${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:latest '
+                     sh 'docker image build -t mypro:v1 .'
                 }
             }
         }
