@@ -76,7 +76,7 @@ pipeline{
             steps{
                 echo "========executing Docker image build========"
                 script {
-                     sh 'chmod 777 /var/run/docker.sock'
+                     sh 'sudo chmod 777 /var/run/docker.sock'
                      sh 'docker image build -t ${JOB_NAME}:v1.${BUILD_ID} .'
                      sh 'docker image tag ${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:v1.${BUILD_ID} '
                      sh 'docker image tag ${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:latest '
@@ -87,7 +87,7 @@ pipeline{
             steps{
                 echo "========executing image push========"
                 withCredentials([usernameColonPassword(credentialsId: 'docker-pass', variable: 'dockerPassword')]) {
-                    sh 'chmod 777 /var/run/docker.sock'
+                    sh 'sudo chmod 777 /var/run/docker.sock'
                     sh "docker login -u lateshh -p ${Docker-pass}"
                     sh 'docker image push lateshh/${JOB_NAME}:v1.${BUILD_ID}'
                     sh 'docker image push lateshh/${JOB_NAME}:latest'
