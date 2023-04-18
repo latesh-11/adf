@@ -2,7 +2,7 @@ FROM maven as build
 WORKDIR /app
 # now I need all my files to be store in /app f.t here first . is for all files and second . is for /app
 COPY . .
-RUN mvm install
+RUN mvn install
 
 
 #  -------- SECOND STAGE -------#
