@@ -86,7 +86,7 @@ pipeline{
             steps{
                 echo "========executing image push========"
                withCredentials([string(credentialsId: 'docker-key', variable: 'dockerpwd')]) {
-                    sh "docker login -u lateshh -p ${Docker-pass}"
+                    sh "docker login -u lateshh -p ${Dockerpwd}"
                     sh 'docker image push lateshh/${JOB_NAME}:v1.${BUILD_ID}'
                     sh 'docker image push lateshh/${JOB_NAME}:latest'
 
