@@ -76,11 +76,29 @@ pipeline{
             steps{
                 echo "========executing Docker image build========"
                 script {
-                     sh 'docker image build -t mypro:v1 .'
+                     sh 'docker image build -t ${JOB_NAME}:v1.${BUILD_ID} .'
+                     sh 'docker image tag ${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:v1.${BUILD_ID} '
+                     sh 'docker image tag ${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:latest '
                 }
             }
         }
-        
+        stage("image push to dockerhub"){
+            steps{
+                echo "========executing image push========"
+                withCredentials([string(credentialsId: 'docker-pass', variable: 'dockerPassword')]) {
+                    sh "docker login -u lateshh -p ${Docker-pass}"
+                    sh 'docker image push lateshh/${JOB_NAME}:v1.${BUILD_ID}'
+                    sh 'docker image push lateshh/${JOB_NAME}:latest'
+                   
+
+                    // Removing all the images we created
+
+                    sh 'docker image rm -f ${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:latest '
+
+                }
+                
+            }
+        }
     }
     post{
         always{
