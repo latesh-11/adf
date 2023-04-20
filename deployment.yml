@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  labels:
+    app: myspringbootapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myspringbootapp
+  template:
+    metadata:
+      labels:
+        app: myspringbootapp
+    spec:
+      containers:
+      - name: myspringbootapp
+        image: lateshh/proj:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9099
