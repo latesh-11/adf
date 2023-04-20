@@ -1,6 +1,6 @@
 region = "us-east-1"
-access_key =  "AKIAXIG4JQIOBT6LIEOT"
-secret_key = "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"
+access_key =  "XYZ"
+secret_key = "XYZ"
 
 
 
