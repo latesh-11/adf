@@ -89,7 +89,10 @@ pipeline{
                     sh "docker login -u lateshh -p ${Dockerpwd}"
                     sh 'docker image push lateshh/${JOB_NAME}:v1.${BUILD_ID}'
                     sh 'docker image push lateshh/${JOB_NAME}:latest'
+                    
+                    // Removing all the images we created
 
+                    sh 'docker image rm -f ${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:v1.${BUILD_ID} lateshh/${JOB_NAME}:latest '
 
                 }
                 
