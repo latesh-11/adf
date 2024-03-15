@@ -1,16 +1,10 @@
+properties([pipelineTriggers([upstream(
+    threshold: hudson.model.Result.SUCCESS,
+    upstreamProjects: "test/test_A/${env.BRANCH_NAME}")])])
 
 pipeline {
     agent any
     stages {
-       stage('Trigger Pipeline B') {
-            steps {
-                script {
-                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-                        build job: 'test/test_A/${env.BRANCH.NMAE}', wait: false
-                    }
-                }
-            }
-        }
         stage('Hello') {
             steps {
                 echo "Current branch: ${env.BRANCH_NAME}"
