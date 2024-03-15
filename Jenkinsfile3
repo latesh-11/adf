@@ -1,9 +1,9 @@
-properties([pipelineTriggers([upstream(
-    threshold: hudson.model.Result.SUCCESS,
-    upstreamProjects: "test/test_A/main")])])
+
 pipeline {
     agent any
-
+     triggers {
+        upstream(upstreamProjects: 'test/test_A/main', threshold: 'SUCCESS')
+    }
     stages {
         stage('Hello') {
             steps {
