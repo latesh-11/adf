@@ -1,0 +1,14 @@
+properties([pipelineTriggers([upstream(
+    threshold: hudson.model.Result.SUCCESS,
+    upstreamProjects: "test/test_A/'${env.BRANCH_NAME}'")])])
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
