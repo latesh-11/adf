@@ -1,10 +1,16 @@
 
 pipeline {
     agent any
-     triggers {
-        upstream(upstreamProjects: 'test/test_A/main', threshold: 'SUCCESS')
-    }
     stages {
+       stage('Trigger Pipeline B') {
+            steps {
+                script {
+                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                        build job: 'test/test_A/${env.BRANCH.NMAE}', wait: false
+                    }
+                }
+            }
+        }
         stage('Hello') {
             steps {
                 echo "Current branch: ${env.BRANCH_NAME}"
