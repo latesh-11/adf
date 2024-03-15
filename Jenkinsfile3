@@ -5,8 +5,7 @@ properties([pipelineTriggers([upstream(
 pipeline {
     agent any
      triggers {
-        // Build after other projects are built
-        upstream(upstreamProjects: 'test/test_A/main', threshold: 'SUCCESS')
+        upstream(upstreamProjects: 'test/test_A/main', threshold: hudson.model.Result.SUCCESS)
     }
     stages {
         stage('Hello') {
