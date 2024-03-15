@@ -3,12 +3,12 @@ properties([pipelineTriggers([upstream(
     upstreamProjects: "test/test_A/'${env.BRANCH_NAME}'")])])
 pipeline {
     agent any
-    echo "Current branch: ${env.BRANCH_NAME}"
-    echo "Build Cause: ${env.BUILD_CAUSE}"
 
     stages {
         stage('Hello') {
             steps {
+                echo "Current branch: ${env.BRANCH_NAME}"
+                echo "Build Cause: ${env.BUILD_CAUSE}"
                 echo 'Hello World'
             }
         }
