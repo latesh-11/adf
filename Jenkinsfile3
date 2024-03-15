@@ -1,6 +1,6 @@
 properties([pipelineTriggers([upstream(
     threshold: hudson.model.Result.SUCCESS,
-    upstreamProjects: "test/test_A/${env.BRANCH_NAME}")])])
+    upstreamProjects: "test/test_A/'${env.BRANCH_NAME}'")])])
 pipeline {
     agent any
 
